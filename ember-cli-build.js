@@ -48,7 +48,7 @@ module.exports = function() {
   }
 
   var testHarness = merge(testHarnessTrees);
-  var tests = find('tests', { include: ['**/*-test.js'] });
+  var tests = find('tests', { include: ['**/*-test.js', 'helpers/**/*.js'] });
   tests = transpile(tests, 'tests');
   tests = concat(tests, {
     inputFiles: ['**/*.js'],

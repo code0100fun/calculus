@@ -47,6 +47,8 @@
     Object.keys(requireModule.entries).forEach(function(entry) {
       if (entry.match(testMatch)) requireModule(entry);
     });
+
+    requireModule('helpers/close');
   </script>
 </body>
 </html>

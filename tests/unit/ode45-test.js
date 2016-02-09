@@ -68,11 +68,29 @@ test("pluck interpolation", function(assert) {
 test("solves a first order ODE with for each t in tspan", function(assert) {
   const y0 = 1;
   const tspan = [0, 1, 2];
-  const [t, y] = ode45((t,h) => 2, tspan, y0);
+  const [t, y] = ode45((t,y) => 2, tspan, y0);
   assert.equal(t[0], 0, 'time 0');
   assert.equal(t[1], 1, 'time 1');
   assert.equal(t[2], 2, 'time 2');
   assert.close(y[0], 1, 1e-12, 'y0 = 1');
   assert.close(y[1], 3, 1e-12, 'y1 = 3');
   assert.close(y[2], 5, 1e-12, 'y2 = 5');
+});
+
+test("solves a first order ODE with a range of tspan", function(assert) {
+  const y0 = 1;
+  const tspan = [0, 2*Math.PI];
+  const [t, y] = ode45((t,y) => Math.sin(t), tspan, y0);
+  assert.ok(t.length > 10, 'more than 10 timesteps');
+
+  const last = t.length-1;
+  const half = Math.floor(last/2);
+
+  assert.equal(t[0],            0,          't0 = 0');
+  assert.close(t[half],   Math.PI, 1e-3, 'thalf = PI');
+  assert.close(t[last], 2*Math.PI, 1e-3,  'tmax = 2PI');
+
+  assert.equal(y[0],    1,       'y(t0)    = 1');
+  assert.close(y[half], 3, 1e-5, 'y(thalf) = 3');
+  assert.close(y[last], 1, 1e-5, 'y(tmax)  = 1');
 });

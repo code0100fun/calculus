@@ -1,5 +1,5 @@
 import { ode45 } from 'calculus';
-import { indexInterpolate, binarySearch, pluckTimes } from 'differential-equations/ordinary/ode45';
+import { indexInterpolate, binarySearch, pluckTimes } from 'differential-equations/ode45';
 
 QUnit.module('ode45');
 

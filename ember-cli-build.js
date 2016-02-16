@@ -8,7 +8,7 @@ var concat = require('broccoli-concat');
 var find = stew.find;
 
 function transpile(tree, label) {
-  return transpileES6(tree, label, { sourceMaps: 'inline' });
+  return transpileES6(tree, label, { avoidDefine: false, sourceMaps: 'inline' });
 }
 
 module.exports = function() {
